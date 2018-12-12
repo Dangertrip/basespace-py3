@@ -1,0 +1,181 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>BaseSpacePy.model.Sample &mdash; BaseSpacePy 0.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="BaseSpacePy 0.2 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../../../index.html">BaseSpacePy 0.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for BaseSpacePy.model.Sample</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">BaseSpacePy.model.QueryParameters</span> <span class="kn">import</span> <span class="n">QueryParameters</span> <span class="k">as</span> <span class="n">qp</span>
+<span class="kn">from</span> <span class="nn">BaseSpacePy.api.BaseSpaceException</span> <span class="kn">import</span> <span class="n">ModelNotInitializedException</span>
+
+<span class="k">class</span> <span class="nc">Sample</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Sample"><a class="viewcode-back" href="../../../Available modules.html#BaseSpacePy.model.Sample.Sample">[docs]</a>    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    A BaseSpace Sample object.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">swaggerTypes</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;HrefGenome&#39;</span><span class="p">:</span> <span class="s">&#39;str&#39;</span><span class="p">,</span>
+            <span class="s">&#39;SampleNumber&#39;</span><span class="p">:</span> <span class="s">&#39;int&#39;</span><span class="p">,</span>
+            <span class="s">&#39;ExperimentName&#39;</span><span class="p">:</span> <span class="s">&#39;str&#39;</span><span class="p">,</span>
+            <span class="s">&#39;HrefFiles&#39;</span><span class="p">:</span> <span class="s">&#39;str&#39;</span><span class="p">,</span>
+            <span class="s">&#39;IsPairedEnd&#39;</span><span class="p">:</span><span class="s">&#39;int&#39;</span><span class="p">,</span>
+            <span class="s">&#39;Read1&#39;</span><span class="p">:</span><span class="s">&#39;int&#39;</span><span class="p">,</span>
+            <span class="s">&#39;Read2&#39;</span><span class="p">:</span><span class="s">&#39;int&#39;</span><span class="p">,</span>
+            <span class="s">&#39;NumReadsRaw&#39;</span><span class="p">:</span><span class="s">&#39;int&#39;</span><span class="p">,</span>
+            <span class="s">&#39;NumReadsPF&#39;</span><span class="p">:</span><span class="s">&#39;int&#39;</span><span class="p">,</span>
+            <span class="s">&#39;Id&#39;</span><span class="p">:</span> <span class="s">&#39;str&#39;</span><span class="p">,</span>
+            <span class="s">&#39;Href&#39;</span><span class="p">:</span> <span class="s">&#39;str&#39;</span><span class="p">,</span>
+            <span class="s">&#39;UserOwnedBy&#39;</span><span class="p">:</span> <span class="s">&#39;UserCompact&#39;</span><span class="p">,</span>
+            <span class="s">&#39;Name&#39;</span><span class="p">:</span> <span class="s">&#39;str&#39;</span><span class="p">,</span>
+            <span class="s">&#39;SampleId&#39;</span><span class="p">:</span> <span class="s">&#39;str&#39;</span><span class="p">,</span>
+            <span class="s">&#39;Status&#39;</span><span class="p">:</span> <span class="s">&#39;str&#39;</span><span class="p">,</span>
+            <span class="s">&#39;StatusSummary&#39;</span><span class="p">:</span> <span class="s">&#39;str&#39;</span><span class="p">,</span>
+            <span class="s">&#39;DateCreated&#39;</span><span class="p">:</span> <span class="s">&#39;datetime&#39;</span><span class="p">,</span>
+            <span class="s">&#39;References&#39;</span><span class="p">:</span><span class="s">&#39;dict&#39;</span><span class="p">,</span>
+            <span class="s">&#39;TotalSize&#39;</span><span class="p">:</span> <span class="s">&#39;int&#39;</span><span class="p">,</span>
+            <span class="s">&#39;AppSession&#39;</span><span class="p">:</span> <span class="s">&#39;AppSessionSemiCompact&#39;</span><span class="p">,</span>
+            <span class="s">&#39;Properties&#39;</span><span class="p">:</span> <span class="s">&#39;PropertyList&#39;</span><span class="p">,</span>
+            <span class="s">&#39;Projects&#39;</span><span class="p">:</span> <span class="s">&#39;list&lt;Project&gt;&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Name</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">isInit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Sample.isInit"><a class="viewcode-back" href="../../../Available modules.html#BaseSpacePy.model.Sample.Sample.isInit">[docs]</a>        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Tests if the Sample instance has been initialized.</span>
+<span class="sd">        </span>
+<span class="sd">        :raises ModelNotInitializedException: if the Id variable is not set</span>
+<span class="sd">        :returns: True on success</span>
+<span class="sd">        </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="s">&#39;The Sample object has not been initialized yet&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">Id</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ModelNotInitializedException</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ModelNotInitializedException</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span>        
+
+    <span class="k">def</span> <span class="nf">getAccessStr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">scope</span><span class="o">=</span><span class="s">&#39;write&#39;</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Sample.getAccessStr"><a class="viewcode-back" href="../../../Available modules.html#BaseSpacePy.model.Sample.Sample.getAccessStr">[docs]</a>        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns the scope-string to used for requesting BaseSpace access to the sample.</span>
+<span class="sd">        </span>
+<span class="sd">        :param scope: The scope type that is request (eg. write, read).</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">isInit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">scope</span> <span class="o">+</span> <span class="s">&#39; sample &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Id</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">getReferencedAppResults</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Sample.getReferencedAppResults"><a class="viewcode-back" href="../../../Available modules.html#BaseSpacePy.model.Sample.Sample.getReferencedAppResults">[docs]</a>        <span class="sd">&#39;&#39;&#39;                </span>
+<span class="sd">        Return the AppResults referenced by this sample. </span>
+<span class="sd">        Note the returned AppResult objects do not have their &quot;References&quot; field set, </span>
+<span class="sd">        to get a fully populated AppResult object you must use getAppResultById in BaseSpaceAPI.</span>
+<span class="sd">        If other reference types than AppResults are present (they shouldn&#39;t be), they are ignored.</span>
+
+<span class="sd">        :param api: A BaseSpaceAPI instance        </span>
+<span class="sd">        :returns: A list of AppResult that are referenced by this sample (with their References field not populated)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">References</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="s">&#39;Type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s">&#39;AppResult&#39;</span><span class="p">:</span>
+                <span class="n">ar_dict</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="s">&#39;Content&#39;</span><span class="p">]</span>
+                <span class="n">ar</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">__deserializeObject__</span><span class="p">(</span><span class="n">ar_dict</span><span class="p">,</span> <span class="s">&quot;AppResult&quot;</span><span class="p">)</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ar</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+    
+    <span class="k">def</span> <span class="nf">getFiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api</span><span class="p">,</span> <span class="n">queryPars</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Sample.getFiles"><a class="viewcode-back" href="../../../Available modules.html#BaseSpacePy.model.Sample.Sample.getFiles">[docs]</a>        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns a list of File objects</span>
+<span class="sd">        </span>
+<span class="sd">        :param api: A BaseSpaceAPI instance</span>
+<span class="sd">        :param queryPars: An (optional) object of type QueryParameters for custom sorting and filtering</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">isInit</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">queryPars</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">queryPars</span> <span class="o">=</span> <span class="n">qp</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">api</span><span class="o">.</span><span class="n">getSampleFilesById</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Id</span><span class="p">,</span> <span class="n">queryPars</span><span class="o">=</span><span class="n">queryPars</span><span class="p">)</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../../../index.html">BaseSpacePy 0.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Illumina.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
